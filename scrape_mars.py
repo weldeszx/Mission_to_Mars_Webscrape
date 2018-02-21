@@ -159,8 +159,7 @@ def scrape():
 
     return mars_dict
 
-
-        
+    
 
 
 

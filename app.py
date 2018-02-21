@@ -1,19 +1,19 @@
-#mLab login
-from mLabpassword import username, password
 
 #flask setup
 from flask import Flask, render_template, redirect
 app = Flask(__name__)
 
 #Mongo DB connection with mLab
+import pymongo
 from pymongo import MongoClient
 
-client = MongoClient("mongodb://%s:%s@ds143707.mlab.com:43707/heroku_4f1hr8cl" % (username, password))
+db_url= 'mongodb://gw:homework@ds241668.mlab.com:41668/mars_mission_webscrape'
+client = pymongo.MongoClient(db_url)
 
-db = client.heroku_4f1hr8cl
+db = client.mars_mission_webscrape
+
 
 collection = db.mars_scrape
-
 # scrape function
 from scrape_mars import scrape
 
@@ -30,4 +30,3 @@ def reload():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
