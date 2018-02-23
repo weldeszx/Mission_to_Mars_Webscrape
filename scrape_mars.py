@@ -25,8 +25,8 @@ def scrape():
     soup = BeautifulSoup(html_code, "html.parser")
 
     #grab needed info
-    news_title = soup.find('div', class_="bottom_gradient").text
-    news_p = soup.find('div', class_="rollover_description_inner").text
+    news_title = soup.find('div', class_="content_title").text
+    news_p = soup.find('div', class_="article_teaser_body").text
 
 
 
@@ -119,7 +119,7 @@ def scrape():
 
     # gets class holding hemisphere picture
     returns = soup.find('div', class_="collapsible results")
-    hemispheres = returns.find_all('a')
+    hemispheres = returns.find_all('div', class_="description")
 
     #setup list to hold dictionaries
     hemisphere_image_urls =[]
@@ -127,7 +127,7 @@ def scrape():
     for a in hemispheres:
         #get title and link from main page
         title = a.h3.text
-        link = "https://astrogeology.usgs.gov" + a['href']
+        link = "https://astrogeology.usgs.gov" + a.a['href']
         
         #follow link from each page
         browser.visit(link)
@@ -137,6 +137,7 @@ def scrape():
         image_page = browser.html
         results = BeautifulSoup(image_page, 'html.parser')
         img_link = results.find('div', class_='downloads').find('li').a['href']
+        # img_link = results.find('div', class_='downloads').find('li').a['href']
         
         # create image dictionary for each image and title
         image_dict = {}
@@ -160,7 +161,6 @@ def scrape():
     return mars_dict
 
     
-
 
 
 

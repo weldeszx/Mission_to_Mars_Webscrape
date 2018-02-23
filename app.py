@@ -11,9 +11,8 @@ db_url= 'mongodb://gw:homework@ds241668.mlab.com:41668/mars_mission_webscrape'
 client = pymongo.MongoClient(db_url)
 
 db = client.mars_mission_webscrape
-
-
 collection = db.mars_scrape
+
 # scrape function
 from scrape_mars import scrape
 
